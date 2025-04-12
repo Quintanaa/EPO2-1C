@@ -145,9 +145,10 @@
 								<div class="col-12">
 									<article>
 										<div th:if="${error}" class="alert alert-danger" role="alert">
-											<i class="bi bi-exclamation-triangle"></i><span th:text="${error}">Error</span>
+											<i class="bi bi-exclamation-triangle"></i><span
+												th:text="${error}">Error</span>
 										</div>
-										
+
 										<div class="post-img">
 											<img src="https://source.unsplash.com/800x400/?api,flask"
 												alt="API Flask" class="img-fluid">
@@ -331,6 +332,56 @@
 													<a th:href="@{/flask-login}"
 														class="btn btn-outline-primary">Ir al formulario de
 														login</a>
+												</div>
+											</div>
+										</article>
+									</div>
+
+									<form th:action="@{/file-upload}" method="post"
+										enctype="multipart/form-data"
+										class="row g-2 align-items-center mt-4">
+										<div class="col-md-8">
+											<input type="file" name="file" class="form-control" required>
+										</div>
+										<div class="col-md-4">
+											<button type="submit" class="btn btn-success w-100">Subir
+												y leer archivo</button>
+										</div>
+									</form>
+
+									<div class="mt-3" th:if="${fileUploadResult}">
+										<strong>Resultado:</strong>
+										<pre th:text="${fileUploadResult}">Esperando resultado...</pre>
+									</div>
+
+									<div class="col-12">
+										<article class="blog-card">
+											<div class="post-img">
+												<img
+													src="https://source.unsplash.com/800x400/?database,error"
+													alt="Error de base de datos" class="img-fluid">
+											</div>
+
+											<h2 class="title">
+												<a href="#">Simulación de errores en base de datos</a>
+											</h2>
+
+											<div class="content">
+												<form th:action="@{/db-error}" method="get"
+													class="d-flex flex-wrap gap-2">
+													<button type="submit" name="type"
+														value="db-connection-error" class="btn btn-danger">Simular
+														fallo de conexión</button>
+													<button type="submit" name="type" value="db-query-error"
+														class="btn btn-warning">Simular tabla inexistente</button>
+													<button type="submit" name="type"
+														value="db-unique-key-error" class="btn btn-info">Simular
+														integridad violada</button>
+												</form>
+
+												<div class="mt-3" th:if="${dbErrorResult}">
+													<strong>Resultado:</strong>
+													<pre th:text="${dbErrorResult}">Esperando resultado...</pre>
 												</div>
 											</div>
 										</article>

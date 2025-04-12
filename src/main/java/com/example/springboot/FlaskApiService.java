@@ -8,9 +8,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.springboot.logins.LoginRequest;
 import com.example.springboot.logins.LoginResponse;
@@ -70,6 +74,43 @@ public class FlaskApiService {
 		}
 		
 		return false;
+	}
+	
+	public String readFile(MultipartFile file, Model model) {
+	    String url = "http://localhost:5000/api/v1/test/file-read";
+
+	    try {
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+	        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+	        body.add("file", new MultipartInputStreamFileResource(file.getInputStream(), file.getOriginalFilename()));
+
+	        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+	        ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+
+	        model.addAttribute("fileUploadResult", response.getBody());
+	    } catch (Exception e) {
+	        model.addAttribute("fileUploadResult", "Error al enviar archivo a Flask: " + e.getMessage());
+	    }
+
+	    return "blog";
+	}
+	
+	public void errorDB(String type, Model model) {
+		String url = "http://localhost:5000/api/v1/test/" + type;
+		
+		try {
+			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+			model.addAttribute("dbErrorResult", response.getBody());
+		} catch (HttpClientErrorException |HttpServerErrorException e) {
+			model.addAttribute("dbErrorResult", "Error desde Flask: " + e.getResponseBodyAsString());
+		} catch (ResourceAccessException e) {
+			model.addAttribute("dbErrorResult", "No se pudo conectar con el servidor Flask.");
+		} catch (Exception e) {
+			model.addAttribute("dbErrorResult", "Error inesperado: " + e.getMessage());
+		}
 	}
 
 }

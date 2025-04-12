@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.springboot.logins.LoginResponse;
 
@@ -43,16 +44,25 @@ public class HelloController {
     }    
     
     @PostMapping("/flask-login")
-    public String doFlaskLogin(@RequestParam String username,
-                               @RequestParam String password,
-                               Model model) {
+    public String doFlaskLogin(@RequestParam String username, @RequestParam String password, Model model) {
         Boolean res = flaskApiService.loginToFlask(username, password, model);
 
         if (res) {
             return "redirect:/blog";
         } else {
-            return "flasklogin";  // Devolver al formulario de login si el login falla
+            return "flask-login";  
         }
+    }
+    
+    @PostMapping("/file-upload")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
+        return flaskApiService.readFile(file, model);
+    }
+    
+    @GetMapping("/db-error")
+    public String testDB(@RequestParam String type, Model model) {
+    	flaskApiService.errorDB(type, model);
+    	return "blog";
     }
 
     /*    @GetMapping("/flasklogin")

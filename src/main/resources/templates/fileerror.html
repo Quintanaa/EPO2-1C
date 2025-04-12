@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error de Lectura de Archivos</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-5">
+    <h2>Error al leer un archivo (simulado desde Flask)</h2>
+
+    <div class="alert alert-info mt-4">
+        <pre th:text="${fileResult}">Cargando...</pre>
+    </div>
+
+    <a href="/" class="btn btn-secondary mt-3">Volver al inicio</a>
+</div>
+
+</body>
+</html>
