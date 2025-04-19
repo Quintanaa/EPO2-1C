@@ -27,6 +27,12 @@ public class FlaskApiService {
 
 	private static final String FLASK_API_URL = "http://127.0.0.1:5000/api/v1/ping";
 
+	private String username2;
+
+	private String email;
+
+	private String token;
+
 	public String getDataFromFlaskApi() {
 		// Llamamos a la API de Flask
 		return restTemplate.getForObject(FLASK_API_URL, String.class);
@@ -46,7 +52,7 @@ public class FlaskApiService {
 		
 		try {
 			ResponseEntity<LoginResponse> response = restTemplate.postForEntity(url, entity, LoginResponse.class);
-			LoginResponse user = response.getBody();
+			LoginResponse user = new LoginResponse();
 
 			model.addAttribute("username", user.getUsername());
 			model.addAttribute("email", user.getEmail());
