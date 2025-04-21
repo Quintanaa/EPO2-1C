@@ -71,7 +71,12 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>es.ubu.lsi</groupId>
+			<artifactId>EPO1-1C-SISDIS2025</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		</dependencies>
 
 	<build>
 		<plugins>

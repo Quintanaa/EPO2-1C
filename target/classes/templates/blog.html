@@ -388,6 +388,61 @@
 									</div>
 
 
+									<div class="container mt-5">
+										<h1 class="mb-4">Consulta de Pokémon</h1>
+
+										<!-- Formulario para buscar Pokémon -->
+										<form action="/pokemon" method="get" class="row g-3 mb-5">
+											<div class="col-auto">
+												<input type="text" class="form-control" name="name"
+													placeholder="Nombre del Pokémon" required>
+											</div>
+											<div class="col-auto">
+												<select class="form-select" name="error">
+													<option value="">Sin error</option>
+													<option value="unauthorized">401 - Unauthorized</option>
+													<option value="forbidden">403 - Forbidden</option>
+													<option value="not_found">404 - Not Found</option>
+													<option value="connection">503 - Connection Error</option>
+													<option value="timeout">504 - Timeout</option>
+													<option value="bad_request">400 - Bad Request</option>
+													<option value="internal_server_error">500 -
+														Internal Error</option>
+												</select>
+											</div>
+											<div class="col-auto">
+												<button type="submit" class="btn btn-primary">Buscar</button>
+											</div>
+										</form>
+
+										<!-- Mostrar error si hay -->
+										<div th:if="${pokemonError}" class="alert alert-danger"
+											role="alert">
+											<span th:text="${pokemonError}"></span>
+										</div>
+
+										<!-- Mostrar datos del Pokémon -->
+										<div th:if="${pokemon}" class="card shadow">
+											<div class="card-body">
+												<h3 class="card-title" th:text="${pokemon.name}">Nombre
+													del Pokémon</h3>
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item"><strong>ID:</strong> <span
+														th:text="${pokemon.id}"></span></li>
+													<li class="list-group-item"><strong>Altura:</strong> <span
+														th:text="${pokemon.height}"></span></li>
+													<li class="list-group-item"><strong>Peso:</strong> <span
+														th:text="${pokemon.weight}"></span></li>
+													<li class="list-group-item"><strong>Tipos:</strong> <span
+														th:text="${pokemon.types}"></span></li>
+													<li class="list-group-item"><strong>Habilidades:</strong><span
+														th:text="${pokemon.abilities}"></span></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+
 								</article>
 
 							</div>

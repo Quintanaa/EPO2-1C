@@ -11,12 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.springboot.logins.LoginResponse;
 
+import pokemon.PokemonDTO;
+
 @Controller
 public class HelloController {
 
 	@Autowired
 	private FlaskApiService flaskApiService;
 	
+	//Páginas generales
 	@GetMapping("/")
 	public String index() {
 		return "index";
@@ -27,6 +30,7 @@ public class HelloController {
 		return "login";
 	}
 
+	//Blog
 	@GetMapping("/blog")
 	public String showBlog(Model model) {
 		try {
@@ -38,6 +42,7 @@ public class HelloController {
         return "blog";
 	}
     
+	//Flask-Login
     @GetMapping("/flask-login")
     public String showFlaskLoginForm() {
         return "flask-login";  // Nombre del archivo .html que contiene el formulario
@@ -54,15 +59,26 @@ public class HelloController {
         }
     }
     
+    //Subir archivos
     @PostMapping("/file-upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
         return flaskApiService.readFile(file, model);
     }
     
+    //Errores de la base de datos
     @GetMapping("/db-error")
     public String testDB(@RequestParam String type, Model model) {
     	flaskApiService.errorDB(type, model);
     	return "blog";
+    }
+    
+    //Consulta de pokemons
+    @GetMapping("/pokemon")
+    public String getPokemon(@RequestParam String name,
+                             @RequestParam(required = false) String error,
+                             Model model) {
+        flaskApiService.getPokemon(name, error, model);
+        return "blog"; 
     }
 
     /*    @GetMapping("/flasklogin")

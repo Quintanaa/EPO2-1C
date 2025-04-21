@@ -18,6 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.springboot.logins.LoginRequest;
 import com.example.springboot.logins.LoginResponse;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import pokemon.PokemonDTO;
 
 @Service
 public class FlaskApiService {
@@ -118,5 +122,37 @@ public class FlaskApiService {
 			model.addAttribute("dbErrorResult", "Error inesperado: " + e.getMessage());
 		}
 	}
+	
+	public void getPokemon(String name, String error, Model model) {
+	    String url = "http://localhost:5000/api/v1/pokemon/pokemon?name=" + name;
+
+	    if (error != null && !error.isEmpty()) {
+	        url += "&error=" + error;
+	    }
+
+	    try {
+	        ResponseEntity<PokemonDTO> response = restTemplate.getForEntity(url, PokemonDTO.class);
+	        PokemonDTO pokemon = response.getBody();
+
+	        if (pokemon != null) {
+	            model.addAttribute("pokemon", pokemon);
+				model.addAttribute("id", pokemon.getId());
+				model.addAttribute("height", pokemon.getHeight());
+				model.addAttribute("weight", pokemon.getWeight());
+				model.addAttribute("abilities", pokemon.getAbilities());
+				model.addAttribute("types", pokemon.getTypes());
+	        } else {
+	            model.addAttribute("pokemonError", "No se encontraron datos del Pokémon.");
+	        }
+
+	    } catch (HttpClientErrorException | HttpServerErrorException e) {
+	        model.addAttribute("pokemonError", "Error de la API: " + e.getResponseBodyAsString());
+	    } catch (ResourceAccessException e) {
+	        model.addAttribute("pokemonError", "No se pudo conectar con la API Flask.");
+	    } catch (Exception e) {
+	        model.addAttribute("pokemonError", "Error inesperado: " + e.getMessage());
+	    }
+	}
+
 
 }
