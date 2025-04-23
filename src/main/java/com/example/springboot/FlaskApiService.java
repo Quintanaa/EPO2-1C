@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pokemon.PokemonDTO;
+import pokemon.PokemonResponse;
 
 @Service
 public class FlaskApiService {
@@ -131,16 +132,11 @@ public class FlaskApiService {
 	    }
 
 	    try {
-	        ResponseEntity<PokemonDTO> response = restTemplate.getForEntity(url, PokemonDTO.class);
-	        PokemonDTO pokemon = response.getBody();
+            ResponseEntity<PokemonResponse> response = restTemplate.getForEntity(url, PokemonResponse.class);
+            PokemonDTO pokemon = response.getBody().getPokemon(); // Accede al Pokémon
 
 	        if (pokemon != null) {
 	            model.addAttribute("pokemon", pokemon);
-				model.addAttribute("id", pokemon.getId());
-				model.addAttribute("height", pokemon.getHeight());
-				model.addAttribute("weight", pokemon.getWeight());
-				model.addAttribute("abilities", pokemon.getAbilities());
-				model.addAttribute("types", pokemon.getTypes());
 	        } else {
 	            model.addAttribute("pokemonError", "No se encontraron datos del Pokémon.");
 	        }
