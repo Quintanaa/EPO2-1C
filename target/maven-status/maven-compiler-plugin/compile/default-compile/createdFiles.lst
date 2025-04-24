@@ -1,0 +1,14 @@
+com\example\springboot\logins\LoginRequest.class
+com\example\springboot\MultipartInputStreamFileResource.class
+com\example\springboot\HelloController.class
+com\example\springboot\pokemon\PokemonDTO.class
+com\example\springboot\Application.class
+com\example\springboot\logins\LoginResponse.class
+com\example\springboot\FlaskApiService.class
+com\example\springboot\Repositorios\UsuarioRepository.class
+com\example\springboot\SecurityConfig.class
+pokemon\PokemonDTO.class
+pokemon\PokemonResponse.class
+com\example\springboot\servicios\UsuarioService.class
+com\example\springboot\pokemon\PokemonResponse.class
+com\example\springboot\model\Usuario.class

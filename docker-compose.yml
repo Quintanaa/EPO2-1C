@@ -15,7 +15,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    build: ./pscapp
+    build: .
     restart: on-failure
     env_file: ./.env
     ports:
@@ -26,7 +26,8 @@ services:
         "spring.datasource.username": "$MYSQLDB_USER",
         "spring.datasource.password": "$MYSQLDB_ROOT_PASSWORD",
         "spring.datasource.driver-class-name": "com.mysql.cj.jdbc.Driver",
-        "spring.jpa.hibernate.ddl-auto": "update"
+        "spring.jpa.hibernate.ddl-auto": "update",
+        "spring.jpa.show-sql" :  "true"
       }'
     volumes:
       - .m2:/root/.m2

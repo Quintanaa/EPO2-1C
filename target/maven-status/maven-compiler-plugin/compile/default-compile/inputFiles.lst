@@ -3,7 +3,12 @@ C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\HelloController.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\logins\LoginRequest.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\logins\LoginResponse.java
+C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\model\Usuario.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\MultipartInputStreamFileResource.java
+C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\pokemon\PokemonDTO.java
+C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\pokemon\PokemonResponse.java
+C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\Repositorios\UsuarioRepository.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\SecurityConfig.java
+C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\com\example\springboot\servicios\UsuarioService.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\pokemon\PokemonDTO.java
 C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\java\pokemon\PokemonResponse.java
