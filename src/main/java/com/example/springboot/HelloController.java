@@ -87,27 +87,4 @@ public class HelloController {
         return "usuarios";
     }
 
-    /*    @GetMapping("/flasklogin")
-    public String showFlaskData() {
-        return "flasklogin";
-    }
-
-    @PostMapping("/flasklogin")
-    public String doFlaskLog(@RequestParam String username,
-                               @RequestParam String password,
-                               Model model) {
-        LoginResponse res = flaskApiService.loginToFlask(username, password, model);
-
-        if (res != null) {
-            model.addAttribute("username", res.getUsername());
-            model.addAttribute("email", res.getEmail());
-            model.addAttribute("token", res.getToken());
-        } else {
-            // Solo mostramos el mensaje de error
-            model.addAttribute("error", "Credenciales incorrectas o error al conectar con la API Flask");
-        }
-
-        return "blog";
-    } */
-
 }

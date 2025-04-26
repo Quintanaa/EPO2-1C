@@ -99,7 +99,7 @@ public class FlaskApiService {
 	}
 
 	public String readFile(MultipartFile file, Model model) {
-		String url = "http://localhost:5000/api/v1/test/file-read";
+		String url = "http://127.0.0.1:5000/api/v1/file/file-read";
 
 		try {
 			HttpHeaders headers = new HttpHeaders();
@@ -121,7 +121,7 @@ public class FlaskApiService {
 	}
 
 	public void errorDB(String type, Model model) {
-		String url = "http://localhost:5000/api/v1/test/" + type;
+		String url = "http://127.0.0.1:5000/api/v1/db/" + type;
 
 		try {
 			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -136,7 +136,7 @@ public class FlaskApiService {
 	}
 
 	public void getPokemon(String name, String error, Model model) {
-		String url = "http://localhost:5000/api/v1/pokemon/pokemon?name=" + name;
+		String url = "http://127.0.0.1:5000/api/v1/pokemon/pokemon?name=" + name;
 
 		if (error != null && !error.isEmpty()) {
 			url += "&error=" + error;

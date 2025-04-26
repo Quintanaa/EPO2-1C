@@ -11,9 +11,10 @@ public class MultipartInputStreamFileResource extends InputStreamResource {
 		super(inputStream);
 		this.filename = filename;
 	}
-	//Quizás podremos quitar los override
+
 	@Override
 	public String getFilename() {
+
 		return this.filename;
 	}
 
