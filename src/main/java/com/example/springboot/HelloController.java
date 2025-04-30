@@ -39,6 +39,7 @@ public class HelloController {
         } catch (Exception e) {
             model.addAttribute("apiData", "Error al conectar con la API Flask: " + e.getMessage());
         }
+        model.addAttribute("userList", usuarioService.getAllUsuarios());
         return "blog";
     }
 
