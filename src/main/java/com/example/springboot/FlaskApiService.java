@@ -2,6 +2,7 @@ package com.example.springboot;
 
 import com.example.springboot.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -32,21 +34,16 @@ public class FlaskApiService {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	private static final String FLASK_API_URL = "http://127.0.0.1:5000/api/v1/ping";
-
-	private String username2;
-
-	private String email;
-
-	private String token;
+	@Value("${api.base-url}")
+	private String flaskBaseUrl;
 
 	public String getDataFromFlaskApi() {
 		// Llamamos a la API de Flask
-		return restTemplate.getForObject(FLASK_API_URL, String.class);
+		return restTemplate.getForObject(flaskBaseUrl + "/api/v1/ping", String.class);
 	}
 
 	public boolean loginToFlask(String username, String password, Model model) {
-		String url = "http://127.0.0.1:5000/api/v1/auth/login";
+		String url = flaskBaseUrl + "/api/v1/auth/login";
 
 		LoginRequest request = new LoginRequest();
 		request.setUsername(username);
@@ -59,7 +56,7 @@ public class FlaskApiService {
 
 		try {
 			ResponseEntity<LoginResponse> response = restTemplate.postForEntity(url, entity, LoginResponse.class);
-			LoginResponse user = new LoginResponse();
+			LoginResponse user = response.getBody();
 
 			model.addAttribute("username", user.getUsername());
 			model.addAttribute("email", user.getEmail());
@@ -99,7 +96,7 @@ public class FlaskApiService {
 	}
 
 	public String readFile(MultipartFile file, Model model) {
-		String url = "http://127.0.0.1:5000/api/v1/file/file-read";
+		String url = flaskBaseUrl + "/api/v1/file/file-read";
 
 		try {
 			HttpHeaders headers = new HttpHeaders();
@@ -121,7 +118,7 @@ public class FlaskApiService {
 	}
 
 	public void errorDB(String type, Model model) {
-		String url = "http://127.0.0.1:5000/api/v1/db/" + type;
+		String url = flaskBaseUrl + "/api/v1/db/" + type;
 
 		try {
 			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -136,7 +133,7 @@ public class FlaskApiService {
 	}
 
 	public void getPokemon(String name, String error, Model model) {
-		String url = "http://127.0.0.1:5000/api/v1/pokemon/pokemon?name=" + name;
+		String url = flaskBaseUrl + "/api/v1/pokemon/pokemon?name=" + name;
 
 		if (error != null && !error.isEmpty()) {
 			url += "&error=" + error;

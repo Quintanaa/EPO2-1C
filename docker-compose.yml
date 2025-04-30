@@ -27,7 +27,8 @@ services:
         "spring.datasource.password": "$MYSQLDB_ROOT_PASSWORD",
         "spring.datasource.driver-class-name": "com.mysql.cj.jdbc.Driver",
         "spring.jpa.hibernate.ddl-auto": "update",
-        "spring.jpa.show-sql" :  "true"
+        "spring.jpa.show-sql" :  "true",
+        "api.base-url" : "${API_DOCKER_URL}"
       }'
     volumes:
       - .m2:/root/.m2
@@ -36,3 +37,7 @@ services:
     tty: true
 volumes:
   db:
+networks:
+  default:
+    external:
+      name: epo2-net

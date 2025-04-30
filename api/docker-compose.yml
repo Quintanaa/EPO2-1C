@@ -7,6 +7,7 @@ services:
       - "5000:5000"
     environment:
       - PYTHONUNBUFFERED=1
+      - MYSQL_URL=mysql+pymysql://root:123456@mysql-api:3306/flask
     volumes:
       - ./api:/app
     extra_hosts:
@@ -25,6 +26,11 @@ services:
     volumes:
       - db_api:/var/lib/mysql
       - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
+    command: --default-authentication-plugin=mysql_native_password --skip-ssl
 
 volumes:
   db_api:
+networks:
+  default:
+    external:
+      name: epo2-net

@@ -15,8 +15,13 @@ from src.auth.controllers.pokemon_api import pokemon_api_blueprint
 
 app = Flask(__name__)
 #MYSQL connection
-MYSQL_URL = os.environ.get("MYSQL_URL", "mysql+pymysql://root:123456@localhost:3306/flask")
-mysql_engine = create_engine(MYSQL_URL)
+MYSQL_URL = os.environ.get("MYSQL_URL", "mysql+pymysql://root:123456@mysql-api:3306/flask")
+mysql_engine = create_engine(
+    MYSQL_URL,
+    pool_pre_ping=True,        # Evita errores por conexiones muertas
+    echo=False,                # Pon True para debug SQL
+    future=True                # Recomendado por SQLAlchemy 1.4+
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=mysql_engine)
 
 # set default version to v1
