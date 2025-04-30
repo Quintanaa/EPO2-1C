@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify 
+from flask import Flask, jsonify
 from marshmallow import ValidationError
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
@@ -15,18 +15,13 @@ from src.auth.controllers.pokemon_api import pokemon_api_blueprint
 
 app = Flask(__name__)
 #MYSQL connection
-MYSQL_URL = os.environ.get("MYSQL_URL", "mysql+pymysql://root:123456@mysql-api:3306/flask")
-mysql_engine = create_engine(
-    MYSQL_URL,
-    pool_pre_ping=True,        # Evita errores por conexiones muertas
-    echo=False,                # Pon True para debug SQL
-    future=True                # Recomendado por SQLAlchemy 1.4+
-)
+MYSQL_URL = os.environ.get("MYSQL_URL", "mysql+pymysql://root:123456@localhost:3306/flask")
+mysql_engine = create_engine(MYSQL_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=mysql_engine)
 
 # set default version to v1
 version = os.environ.get('API_VERSION', 'v1')
- 
+
 prefix = f"/api/{version}"
 
 
