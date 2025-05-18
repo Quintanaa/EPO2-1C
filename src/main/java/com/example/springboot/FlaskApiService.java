@@ -12,15 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.springboot.logins.LoginRequest;
-import com.example.springboot.logins.LoginResponse;
+import com.example.springboot.dto.LoginRequest;
+import com.example.springboot.dto.LoginResponse;
 
 import com.example.springboot.pokemon.PokemonDTO;
 import com.example.springboot.pokemon.PokemonResponse;

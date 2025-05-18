@@ -1,5 +1,7 @@
 package com.example.springboot;
 
+import com.example.springboot.servicios.RoleService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ public class HelloController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private RoleService roleService;
 
     //Páginas generales
     @GetMapping("/")
@@ -49,16 +54,22 @@ public class HelloController {
         return "flask-login";  // Nombre del archivo .html que contiene el formulario
     }
 
+
     @PostMapping("/flask-login")
-    public String doFlaskLogin(@RequestParam String username, @RequestParam String password, Model model) {
+    public String doFlaskLogin(@RequestParam String username, @RequestParam String password, Model model,
+                               HttpSession session) {
         Boolean res = flaskApiService.loginToFlask(username, password, model);
 
         if (res) {
+            // Guardamos el usuario autenticado en la sesión
+            session.setAttribute("loggedInUser", username);
             return "redirect:/blog";
         } else {
             return "flask-login";
         }
     }
+
+
 
     //Subir archivos
     @PostMapping("/file-upload")
@@ -75,9 +86,7 @@ public class HelloController {
 
     //Consulta de pokemons
     @GetMapping("/pokemon")
-    public String getPokemon(@RequestParam String name,
-                             @RequestParam(required = false) String error,
-                             Model model) {
+    public String getPokemon(@RequestParam String name, @RequestParam(required = false) String error, Model model) {
         flaskApiService.getPokemon(name, error, model);
         return "blog";
     }

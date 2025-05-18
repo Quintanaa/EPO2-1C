@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2bd00c2d-fd7d-4624-88b6-d69bdf4ccf50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/Repositorios/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/LoginResponsePasswd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/psswd/ValidarFormatoPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/securityservice/IUsuarioServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/securityservice/UsuarioSecurityImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.m2/copy_reference_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/.m2/copy_reference_file.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/api/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/api/sql/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/auth/services/auth_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/auth/services/auth_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/FlaskApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/FlaskApiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/Repositorios/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/Repositorios/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/logins/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/logins/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/pokemon/PokemonResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/pokemon/PokemonResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/FlaskApiService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/HelloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/logins/LoginRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/springboot/logins/LoginResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/springboot/HelloControllerITest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/springboot/HelloControllerTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Quintanaa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Quintanaa/EPO2-1C.git&quot;,
+    &quot;accountId&quot;: &quot;f31d2c8a-f219-42ad-a735-d2ccc6d40fc3&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2w8lKSKnpOFvDTfAF8ioKaUJ7BY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.Dockerfile.executor": "Run",
+    "Docker.api/Dockerfile.executor": "Run",
+    "Docker.api/docker-compose_api.yml: Compose Deployment.executor": "Run",
+    "Docker.api: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.app: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.flask-api: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mysqldb: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.docker-compose_api.yml: Compose Deployment.executor": "Run",
+    "Docker.pscapp/Dockerfile.executor": "Run",
+    "Docker.rest-python-flask/Dockerfile.executor": "Run",
+    "Docker.rest-python-flask: Compose Deployment.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Gradle.Download Sources.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.Application.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Rubén/eclipse-workspace/gs-spring-boot-main/EPO2-1C",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.springboot.securityservice" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\rest-python-flask" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C" />
+      <recent name="C:\Users\Rubén\Desktop\UBU\EPO2-1C\pscapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api\sql" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api\database\api_flask_mysql.sql" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\pscapp" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.springboot.servicios" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="spring-boot.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.springboot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.springboot.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="api/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="api/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="rest-python-flask: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="rest-python-flask/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="rest-python-flask/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="rest-python-flask/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="Docker.rest-python-flask/Dockerfile" />
+        <item itemvalue="Docker.rest-python-flask: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.api/Dockerfile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2bd00c2d-fd7d-4624-88b6-d69bdf4ccf50" name="Changes" comment="" />
+      <created>1745431017908</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745431017908</updated>
+      <workItem from="1745431019053" duration="4075000" />
+      <workItem from="1745436364721" duration="128000" />
+      <workItem from="1745436590843" duration="97000" />
+      <workItem from="1745436710074" duration="12000" />
+      <workItem from="1745492164684" duration="4909000" />
+      <workItem from="1745497669862" duration="75000" />
+      <workItem from="1745497841966" duration="4345000" />
+      <workItem from="1745504174897" duration="1810000" />
+      <workItem from="1745506394696" duration="937000" />
+      <workItem from="1745516412311" duration="852000" />
+      <workItem from="1745526352377" duration="3022000" />
+      <workItem from="1745569100452" duration="3014000" />
+      <workItem from="1745575802648" duration="8639000" />
+      <workItem from="1745590893909" duration="1605000" />
+      <workItem from="1745603297299" duration="3972000" />
+      <workItem from="1745662094097" duration="3843000" />
+      <workItem from="1745693727350" duration="10856000" />
+      <workItem from="1745705907133" duration="74000" />
+      <workItem from="1745707959665" duration="1275000" />
+      <workItem from="1746003747151" duration="1489000" />
+      <workItem from="1746009825113" duration="1670000" />
+      <workItem from="1746012774591" duration="7573000" />
+      <workItem from="1746029666239" duration="2944000" />
+      <workItem from="1746047294446" duration="2601000" />
+      <workItem from="1746109211432" duration="11200000" />
+      <workItem from="1746198203486" duration="640000" />
+      <workItem from="1746209420442" duration="2000" />
+      <workItem from="1746444696725" duration="2659000" />
+      <workItem from="1747564268212" duration="1308000" />
+      <workItem from="1747565974161" duration="340000" />
+      <workItem from="1747566327543" duration="4587000" />
+      <workItem from="1747582510542" duration="7016000" />
+      <workItem from="1747610684195" duration="71000" />
+      <workItem from="1747610802154" duration="136000" />
+      <workItem from="1747610959887" duration="302000" />
+      <workItem from="1747611356655" duration="98000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/springboot/MultipartInputStreamFileResource.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

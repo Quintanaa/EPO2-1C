@@ -6,27 +6,35 @@ services:
     ports:
       - "5000:5000"
     environment:
+      - FLASK_APP=src/app.py
+      - FLASK_ENV=development
       - PYTHONUNBUFFERED=1
-      - MYSQL_URL=mysql+pymysql://root:123456@mysqldb:3306/flask
+      - MYSQL_HOST=mysqldb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+      - MYSQL_DB=api_flask
+      - MYSQL_URL=mysql+pymysql://root:123456@mysqldb:3306/api_flask
     volumes:
       - .:/api
     depends_on:
       - mysqldb
 
   mysqldb:
-    image: mysql:8.0.2
+    image: mysql:8.0
     container_name: mysql-api
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=flask
+      - MYSQL_DATABASE=api_flask
     ports:
-      - "3608:3306"
+      - "3306:3306"
     volumes:
-      - db_api:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
       - ./sql/data.sql:/docker-entrypoint-initdb.d/data.sql
-    command: --default-authentication-plugin=mysql_native_password --skip-ssl
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
 volumes:
-  db_api:
+  mysql_data:
+
 networks:
   default:
     external:

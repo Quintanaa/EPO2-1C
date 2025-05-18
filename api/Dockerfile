@@ -1,14 +1,26 @@
 FROM python:3.9-slim
 
-# Crear directorio de trabajo
+# Instalamos mysql
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    pkg-config \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /api
 
-# Copiar código y dependencias
 COPY requirements.txt .
+
+# Dependencias de python
 RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install pymysql
-RUN pip install flask-cors
+RUN pip install pymysql flask-cors
 
 COPY . .
 
-CMD python -m flask run --host 0.0.0.0
+ENV FLASK_APP=src/app.py
+ENV FLASK_ENV=development
+
+EXPOSE 5000
+
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD python -m flask run --host=0.0.0.0

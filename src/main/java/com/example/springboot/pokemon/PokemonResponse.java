@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PokemonResponse {
-    private PokemonDTO pokemon; // Este campo debe coincidir con la estructura de la respuesta JSON
+    private PokemonDTO pokemon;
 }

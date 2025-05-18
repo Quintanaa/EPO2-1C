@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from src.auth.auth_exception import UserNotFoundException
-from src.auth.models.user import User  # Asegúrate de que el modelo exista
+from src.auth.models.user import User
 
 import hashlib
 

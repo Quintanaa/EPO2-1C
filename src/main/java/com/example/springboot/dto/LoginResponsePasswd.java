@@ -1,5 +1,6 @@
-package com.example.springboot.model;
+package com.example.springboot.dto;
 
+import com.example.springboot.model.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,12 +13,10 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "usuarios")
-public class Usuario {
+//DTO con la contraseña
+public class LoginResponsePasswd {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private long id;
 
     @Column(unique = true)
@@ -26,8 +25,9 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
+    @Column
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Column
     private Set<Role> roles;
 }

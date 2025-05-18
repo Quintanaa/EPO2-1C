@@ -1,8 +1,6 @@
-package com.example.springboot.logins;
+package com.example.springboot.dto;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
-	@Column
+//Se trata del DTO del Login
+public class LoginRequest {
+
 	private String username;
 	
-	@Column
-	private String email;
-	
-	@Column
-	private String token;
-	
+	private String password;
+
 }
