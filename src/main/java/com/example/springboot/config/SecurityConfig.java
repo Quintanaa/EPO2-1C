@@ -45,7 +45,7 @@ public class SecurityConfig {
 		);
 		http.logout(logout -> logout
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/login?logout")
+				.logoutSuccessUrl("/blog")
 				//Extras
 		);
 		http.authorizeHttpRequests()

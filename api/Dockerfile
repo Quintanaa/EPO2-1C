@@ -22,5 +22,4 @@ ENV FLASK_ENV=development
 
 EXPOSE 5000
 
-CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
 CMD python -m flask run --host=0.0.0.0

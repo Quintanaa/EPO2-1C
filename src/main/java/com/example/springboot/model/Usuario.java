@@ -1,5 +1,6 @@
 package com.example.springboot.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Usuario {
 
     private String password;
 
+    @Nullable
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 }

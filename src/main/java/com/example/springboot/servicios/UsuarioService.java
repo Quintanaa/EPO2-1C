@@ -45,9 +45,9 @@ public class UsuarioService {
             Usuario usuario = (Usuario) iterator.next();
             LoginResponse loginResponse = new LoginResponse();
             modelMapper.map(usuario, loginResponse);
-            listUsrDTO().add(loginResponse);
+            responses.add(loginResponse);
         }
-        return listUsrDTO();
+        return responses;
     }
 
     public LoginResponse saveusr(Usuario usuario) {

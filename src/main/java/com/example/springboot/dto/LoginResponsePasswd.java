@@ -16,18 +16,13 @@ import java.util.Set;
 //DTO con la contraseña
 public class LoginResponsePasswd {
 
-    @Column
     private long id;
 
-    @Column(unique = true)
     private String username;
 
-    @Column(unique = true)
     private String email;
 
-    @Column
     private String password;
 
-    @Column
-    private Set<Role> roles;
+    private Set<RoleDTO> roles;
 }
