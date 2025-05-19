@@ -44,7 +44,7 @@ public class HelloController {
         } catch (Exception e) {
             model.addAttribute("apiData", "Error al conectar con la API Flask: " + e.getMessage());
         }
-        model.addAttribute("userList", usuarioService.getAllUsuarios());
+        model.addAttribute("userList", usuarioService.listUsrDTO());
         return "blog";
     }
 
@@ -70,7 +70,6 @@ public class HelloController {
     }
 
 
-
     //Subir archivos
     @PostMapping("/file-upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, Model model) {
@@ -93,7 +92,7 @@ public class HelloController {
 
     @GetMapping("/usuarios")
     public String getUsuarios(Model model) {
-        model.addAttribute("usuarios", usuarioService.getAllUsuarios());
+        model.addAttribute("usuarios", usuarioService.listUsrDTO());
         return "usuarios";
     }
 

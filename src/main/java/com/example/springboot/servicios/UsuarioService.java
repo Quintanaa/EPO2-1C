@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -27,9 +26,9 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Optional<Usuario> loginUsuario(String usuario, String password) {
+    /*public Optional<Usuario> loginUsuario(String usuario, String password) {
         return usuarioRepository.findByUsername(usuario).filter(u -> u.getPassword().equals(password));
-    }
+    }*/
 
     /*public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
