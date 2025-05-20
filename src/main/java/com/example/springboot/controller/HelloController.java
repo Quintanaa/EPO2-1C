@@ -22,6 +22,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -205,7 +206,7 @@ public class HelloController {
         return "usuarios";
     }
 
-    @GetMapping("usuarios/editar/{id}")
+    @GetMapping("/usuarios/editar/{id}")
     public String editarUsuario(@PathVariable Long id, ModelMap interfaz) {
         Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
         if (usuario == null) {
@@ -223,7 +224,7 @@ public class HelloController {
         return "editarUsers";
     }
 
-    @PostMapping("usuarios/editar/{id}")
+    @PostMapping("/usuarios/editar/{id}")
     public String guardarUsuario(@PathVariable Long id,
                                  @ModelAttribute(name = "loginForm") LoginResponse loginResponse,
                                  @RequestParam("roles") List<Long> roleIds) {
@@ -244,7 +245,7 @@ public class HelloController {
         return "redirect:/usuarios";
     }
 
-    @GetMapping("usuarios/eliminar/{id}")
+    @GetMapping("/usuarios/eliminar/{id}")
     public String confirmarEliminar(@PathVariable Long id, ModelMap interfaz) {
         Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
         if (usuario == null) {
@@ -257,9 +258,43 @@ public class HelloController {
         return "eliminarUsers";
     }
 
-    @PostMapping("usuarios/eliminar/{id}")
+    @PostMapping("/usuarios/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id, ModelMap interfaz) {
         usuarioService.getRepo().deleteById(id);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/usuarios/passwd")
+    public String mostrarPasswd(ModelMap interfaz) {
+        return "passwd";
+    }
+
+    @PostMapping("/usuarios/passwd")
+    public String cambiarPasswd(@RequestParam String viejaPasswd, @RequestParam String nuevaPasswd,
+                                @RequestParam String confirmPassword, ModelMap interfaz,
+                                Principal principal) {
+        String username = principal.getName();
+        Usuario usuario = usuarioService.getRepo().findByUsername(username);
+
+        if (usuario == null) {
+            interfaz.addAttribute("error", "Usuario no encontrado.");
+            return "cambiarPasswd";
+        }
+
+        if(!passwordEncoder.matches(viejaPasswd, usuario.getPassword())) {
+            interfaz.addAttribute("error", "La contraseña actual no es correcta.");
+            return "cambiarPasswd";
+        }
+
+        if(!nuevaPasswd.equals(confirmPassword)) {
+            interfaz.addAttribute("error", "La contraseñas no coinciden.");
+            return "cambiarPasswd";
+        }
+
+        usuario.setPassword(passwordEncoder.encode(nuevaPasswd));
+        usuarioService.getRepo().save(usuario);
+
+        interfaz.addAttribute("mensaje", "Contraseña actualizada correctamente.");
         return "redirect:/usuarios";
     }
 }
