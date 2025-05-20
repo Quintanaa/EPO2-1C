@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bd00c2d-fd7d-4624-88b6-d69bdf4ccf50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/errorUsers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editarUsers.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/passwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/passwd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +345,7 @@
       <workItem from="1747652548847" duration="222000" />
       <workItem from="1747656516055" duration="11376000" />
       <workItem from="1747688378531" duration="177000" />
-      <workItem from="1747729107849" duration="14862000" />
+      <workItem from="1747729107849" duration="21019000" />
     </task>
     <servers />
   </component>

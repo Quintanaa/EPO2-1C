@@ -15,6 +15,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -200,10 +201,17 @@ public class HelloController {
         return "blog";
     }
 
+    @Secured("ADMIN")
     @GetMapping("/usuarios")
     public String listaUsuarios(ModelMap interfaz) {
         interfaz.addAttribute("usuarios", usuarioService.listUsrDTO());
         return "usuarios";
+    }
+
+    @GetMapping("/usuarios")
+    public String listaUsuariosNoAdmin(ModelMap interfaz) {
+        interfaz.addAttribute("usuarios", usuarioService.listUsrDTO());
+        return "errorUsers";
     }
 
     @GetMapping("/usuarios/editar/{id}")
@@ -265,16 +273,17 @@ public class HelloController {
     }
 
     @GetMapping("/usuarios/passwd/{id}")
-    public String mostrarPasswd(ModelMap interfaz) {
+    public String mostrarPasswd(@PathVariable Long id,ModelMap interfaz) {
+        interfaz.addAttribute("id", id);
         return "passwd";
     }
 
     @PostMapping("/usuarios/passwd{id}")
-    public String cambiarPasswd(@RequestParam String viejaPasswd, @RequestParam String nuevaPasswd,
-                                @RequestParam String confirmPassword, ModelMap interfaz,
-                                Principal principal) {
-        String username = principal.getName();
-        Usuario usuario = usuarioService.getRepo().findByUsername(username);
+    public String cambiarPasswd(@PathVariable Long id,@RequestParam String viejaPasswd,
+                                @RequestParam String nuevaPasswd, @RequestParam String confirmPassword,
+                                ModelMap interfaz) {
+
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
 
         if (usuario == null) {
             interfaz.addAttribute("error", "Usuario no encontrado.");
@@ -283,11 +292,19 @@ public class HelloController {
 
         if(!passwordEncoder.matches(viejaPasswd, usuario.getPassword())) {
             interfaz.addAttribute("error", "La contraseña actual no es correcta.");
+            interfaz.addAttribute("id", id);
             return "cambiarPasswd";
         }
 
         if(!nuevaPasswd.equals(confirmPassword)) {
             interfaz.addAttribute("error", "La contraseñas no coinciden.");
+            interfaz.addAttribute("id", id);
+            return "cambiarPasswd";
+        }
+
+        if(!ValidarFormatoPassword.validarFormato(nuevaPasswd)) {
+            interfaz.addAttribute("error", "La contraseña no es válida.");
+            interfaz.addAttribute("id", id);
             return "cambiarPasswd";
         }
 

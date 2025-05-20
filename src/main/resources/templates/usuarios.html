@@ -1,43 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Administración de Usuarios</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-<div class="container mt-4">
-    <div class="row mb-3">
-        <div class="col">
-            <h2>Administración de Usuarios</h2>
-        </div>
-        <div class="col text-end">
-            <a th:href="@{/blog}" class="btn btn-secondary">
-                <i class="fas fa-home"></i> Volver al Blog
-            </a>
-            <a th:href="@{/registro}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Nuevo Usuario
-            </a>
-        </div>
-    </div>
+<body class="bg-light">
+<div class="container py-4">
+    <h2 class="mb-4">Gestión de Usuarios</h2>
 
-    <!-- Mensajes de alerta -->
+    <!-- Mensaje de éxito -->
     <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
         <span th:text="${mensaje}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span th:text="${error}"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    <!-- Tabla de usuarios -->
-    <div class="card">
-        <div class="card-header bg-primary text-white">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Lista de Usuarios</h5>
+            <a th:href="@{/registro}" class="btn btn-light btn-sm">Añadir Usuario</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -57,35 +39,28 @@
                         <td th:text="${usuario.username}"></td>
                         <td th:text="${usuario.email}"></td>
                         <td>
-                                    <span th:if="${usuario.roles != null && usuario.roles.size() > 0}">
-                                        <span th:each="rol, iterStat : ${usuario.roles}">
-                                            <span th:text="${rol.role}"></span>
-                                            <span th:if="${!iterStat.last}">, </span>
-                                        </span>
+                                    <span th:if="${usuario.roles != null}" th:each="rol, iterStat : ${usuario.roles}">
+                                        <span th:text="${rol.role}"></span>
+                                        <span th:unless="${iterStat.last}">, </span>
                                     </span>
-                            <span th:if="${usuario.roles == null || usuario.roles.size() == 0}">
-                                        Sin roles
-                                    </span>
+                            <span th:if="${usuario.roles == null || usuario.roles.isEmpty()}">Sin roles</span>
                         </td>
                         <td>
-                            <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" class="btn btn-sm btn-warning me-1">
-                                <i class="fas fa-edit"></i> Editar
-                            </a>
-                            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i> Eliminar
-                            </a>
+                            <div class="btn-group btn-group-sm">
+                                <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="btn btn-primary">Editar</a>
+                                <a th:href="@{/usuarios/passwd/{id}(id=${usuario.id})}" class="btn btn-warning">Cambiar Contraseña</a>
+                                <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}" class="btn btn-danger">Eliminar</a>
+                            </div>
                         </td>
-                    </tr>
-                    <tr th:if="${usuarios}">
-                        <td colspan="5" class="text-center">No hay usuarios registrados</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="card-footer">
+            <a th:href="@{/blog}" class="btn btn-secondary">Volver al Blog</a>
+        </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
