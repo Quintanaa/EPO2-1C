@@ -2,7 +2,10 @@ package com.example.springboot.controller;
 
 import com.example.springboot.FlaskApiService;
 import com.example.springboot.dto.LoginRequest;
+import com.example.springboot.dto.LoginResponse;
 import com.example.springboot.dto.LoginResponsePasswd;
+import com.example.springboot.dto.RoleDTO;
+import com.example.springboot.model.Role;
 import com.example.springboot.model.Usuario;
 import com.example.springboot.psswd.ValidarFormatoPassword;
 import com.example.springboot.securityservice.IUsuarioServicio;
@@ -16,11 +19,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HelloController {
@@ -51,6 +56,11 @@ public class HelloController {
         user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("email@email.com");
         usuarioService.saveusr(user);
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role(1L, "ADMIN"));
+        roles.add(new Role(2L, "USER"));
+        roles.add(new Role(3L, "MODERATOR"));
+
     }
 
     //Páginas generales
@@ -78,14 +88,14 @@ public class HelloController {
         }
     }
 
-    @GetMapping("/usuarios/registro")
+    @GetMapping("/registro")
     public String vistaRegistro(Model interfaz) {
         interfaz.addAttribute("listaRoles", roleService.roleList());
-        System.out.println("Preparando pantalla registro");
+        interfaz.addAttribute("datosUsuario", new LoginResponsePasswd());
         return "registro";
     }
 
-    @PostMapping("/usuarios/registro")
+    @PostMapping("/registro")
     public String guardarRegistro(@ModelAttribute(name = "datosUsuario") LoginResponsePasswd usuarioDTOpasswd) throws Exception {
         //Comprobamos el patrón
         System.out.println("Guardando usuario antes: ");
@@ -101,9 +111,8 @@ public class HelloController {
             //Codifico la contraseña
             String encodedPassword = userService.getEncodedPassword(usuario);
             usuario.setPassword(encodedPassword);
-            //El usuario se guarda como no autorizado
-            //Guardo la password
-            //return "usuarios/detalleusuario";
+            //Probar con esto
+            usuarioService.saveusr(usuario);
             return String.format("redirect:/login", usuarioService.saveusr(usuario).getToken());
         } else {
             return "registro";
@@ -171,6 +180,51 @@ public class HelloController {
         return "usuarios";
     }
 
+    @GetMapping("usuarios/editar/{id}")
+    public String editarUsuario(@PathVariable Long id, ModelMap interfaz) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
 
+        LoginResponse loginResponse = new LoginResponse();
+        new ModelMapper().map(usuario, loginResponse);
+        interfaz.addAttribute("loginResponse", loginResponse);
+        return "editarUsers";
+    }
 
+    @PostMapping("usuarios/editar/{id}")
+    public String guardarUsuario(@PathVariable Long id, @ModelAttribute(name = "loginForm") LoginResponse loginResponse) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
+
+        usuario.setUsername(loginResponse.getUsername());
+        usuario.setEmail(loginResponse.getEmail());
+
+        //Debemos gestionar la contraseña a parte
+
+        usuarioService.getRepo().save(usuario);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("usuarios/eliminar/{id}")
+    public String confirmarEliminar(@PathVariable Long id, ModelMap interfaz) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
+
+        LoginResponse loginResponse = new LoginResponse();
+        new ModelMapper().map(usuario, loginResponse);
+        interfaz.addAttribute("loginResponse", loginResponse);
+        return "eliminarUsers";
+    }
+
+    @PostMapping("usuarios/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id, ModelMap interfaz) {
+        usuarioService.getRepo().deleteById(id);
+        return "redirect:/usuarios";
+    }
 }

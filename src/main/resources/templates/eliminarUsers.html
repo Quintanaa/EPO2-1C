@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Usuario</title>
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>¿Estás seguro de que deseas eliminar este usuario?</h2>
+    <p><strong>Usuario:</strong> <span th:text="${usuario.username}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+
+    <form th:action="@{'/usuarios/eliminar/' + ${usuario.id}}" method="get">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a th:href="@{/usuarios}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

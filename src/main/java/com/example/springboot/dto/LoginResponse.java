@@ -15,6 +15,9 @@ import java.util.Set;
 @NoArgsConstructor
 //DTO de los datos sin contraseña
 public class LoginResponse {
+
+	private long id;
+
 	private String username;
 
 	private String email;

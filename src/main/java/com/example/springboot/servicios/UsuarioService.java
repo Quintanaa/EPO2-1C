@@ -26,14 +26,6 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    /*public Optional<Usuario> loginUsuario(String usuario, String password) {
-        return usuarioRepository.findByUsername(usuario).filter(u -> u.getPassword().equals(password));
-    }*/
-
-    /*public List<Usuario> getAllUsuarios() {
-        return usuarioRepository.findAll();
-    }*/
-
     public List<LoginResponse> listUsrDTO(){
         ModelMapper modelMapper = new ModelMapper();
         List<Usuario> usuarios = usuarioRepository.findAll();

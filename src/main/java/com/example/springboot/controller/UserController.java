@@ -40,6 +40,7 @@ public class UserController {
     @GetMapping("/registro")
     public String vistaRegistro(Model interfaz) {
         interfaz.addAttribute("listaRoles", roleService.roleList());
+        interfaz.addAttribute("datosUsuario", new LoginResponsePasswd()); // este nombre debe coincidir
         System.out.println("Preparando pantalla registro");
         return "registro";
     }
