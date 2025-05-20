@@ -1,5 +1,6 @@
 package com.example.springboot.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -28,12 +30,6 @@ public class SecurityConfig {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-/*	@Bean
-	public UserDetailsService users() {
-        UserDetails user = User.withUsername("admin").password("{noop}admin").build();
-
-        return new InMemoryUserDetailsManager(user);
-	}*/
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -55,7 +51,7 @@ public class SecurityConfig {
 
 				.and()
 				.exceptionHandling()
-				.accessDeniedPage("/accessDenied")
+				.accessDeniedHandler(accessDeniedHandler())
 
 				.and()
 				.csrf().disable()
@@ -63,10 +59,14 @@ public class SecurityConfig {
 				.authenticationProvider(authenticationProvider());
 
 		return http.build();
-	/*	http.authorizeHttpRequests(auth -> auth.requestMatchers("/assets/**","/css/**","/js/**").permitAll().anyRequest().authenticated())
-		.formLogin().defaultSuccessUrl("/blog",true).and().logout(logout -> logout.logoutSuccessUrl("/login?logout"));
-		
-		return http.build();*/
+	}
+
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		return (request, response, accessDeniedException) -> {
+			// Redirige a la ruta que sirve la plantilla de error
+			response.sendRedirect("/errorUsers");
+		};
 	}
 
 	@Bean

@@ -208,10 +208,10 @@ public class HelloController {
         return "usuarios";
     }
 
-    @GetMapping("/usuarios")
-    public String listaUsuariosNoAdmin(ModelMap interfaz) {
-        interfaz.addAttribute("usuarios", usuarioService.listUsrDTO());
-        return "errorUsers";
+    @GetMapping("/errorUsers")
+    public String accesoDenegado(Model model) {
+        model.addAttribute("mensaje", "No tienes permiso para acceder a esta página.");
+        return "errorUsers"; // Nombre de la plantilla
     }
 
     @GetMapping("/usuarios/editar/{id}")
