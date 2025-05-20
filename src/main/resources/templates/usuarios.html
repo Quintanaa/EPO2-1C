@@ -17,7 +17,7 @@
             <a th:href="@{/blog}" class="btn btn-secondary">
                 <i class="fas fa-home"></i> Volver al Blog
             </a>
-            <a th:href="@{/usuarios/nuevo}" class="btn btn-primary">
+            <a th:href="@{/registro}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Nuevo Usuario
             </a>
         </div>
@@ -71,8 +71,7 @@
                             <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" class="btn btn-sm btn-warning me-1">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn btn-sm btn-danger"
-                               onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
+                            <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </td>

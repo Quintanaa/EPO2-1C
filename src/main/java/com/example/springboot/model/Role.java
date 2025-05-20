@@ -24,4 +24,7 @@ public class Role {
     @Column
     private String role;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<Usuario> usuarios;
+
 }

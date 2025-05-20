@@ -49,6 +49,19 @@ public class HelloController {
     }
 
     @PostConstruct
+    public void addRoles(){
+        crearRol("ADMIN");
+        crearRol("USER");
+        crearRol("MODERATOR");
+    }
+
+    private void crearRol(String rol){
+        Role role = new Role();
+        role.setRole(rol);
+        roleService.save(role);
+    }
+
+    @PostConstruct
     public void addFirstUser(){
         Usuario user = new Usuario();
         user.setId(37);
@@ -56,10 +69,11 @@ public class HelloController {
         user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("email@email.com");
         usuarioService.saveusr(user);
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role(1L, "ADMIN"));
-        roles.add(new Role(2L, "USER"));
-        roles.add(new Role(3L, "MODERATOR"));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByNombre("ADMIN"));
+        roles.add(roleService.findByNombre("USER"));
+        roles.add(roleService.findByNombre("MODERATOR"));
+        user.setRoles(roles);
 
     }
 
@@ -194,7 +208,9 @@ public class HelloController {
     }
 
     @PostMapping("usuarios/editar/{id}")
-    public String guardarUsuario(@PathVariable Long id, @ModelAttribute(name = "loginForm") LoginResponse loginResponse) {
+    public String guardarUsuario(@PathVariable Long id,
+                                 @ModelAttribute(name = "loginForm") LoginResponse loginResponse,
+                                 @RequestParam("roles") List<Long> roleIds) {
         Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
         if (usuario == null) {
             return "redirect:/usuarios";
@@ -204,6 +220,9 @@ public class HelloController {
         usuario.setEmail(loginResponse.getEmail());
 
         //Debemos gestionar la contraseña a parte
+
+        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(roleIds));
+        usuario.setRoles(roles);
 
         usuarioService.getRepo().save(usuario);
         return "redirect:/usuarios";
