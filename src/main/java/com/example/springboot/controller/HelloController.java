@@ -68,13 +68,15 @@ public class HelloController {
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("admin"));
         user.setEmail("email@email.com");
-        usuarioService.saveusr(user);
+
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.findByNombre("ADMIN"));
         roles.add(roleService.findByNombre("USER"));
         roles.add(roleService.findByNombre("MODERATOR"));
         user.setRoles(roles);
 
+        usuarioService.saveusr(user);
+        System.out.println("Usuario creado con todos los roles");
     }
 
     //Páginas generales
@@ -110,7 +112,8 @@ public class HelloController {
     }
 
     @PostMapping("/registro")
-    public String guardarRegistro(@ModelAttribute(name = "datosUsuario") LoginResponsePasswd usuarioDTOpasswd) throws Exception {
+    public String guardarRegistro(@ModelAttribute(name = "datosUsuario") LoginResponsePasswd usuarioDTOpasswd,
+                                  @RequestParam(required = false) List<Long> selectedRoles) throws Exception {
         //Comprobamos el patrón
         System.out.println("Guardando usuario antes: ");
         System.out.println("usuario: " + usuarioDTOpasswd.getUsername() + " password: " + usuarioDTOpasswd.getPassword());
@@ -125,7 +128,15 @@ public class HelloController {
             //Codifico la contraseña
             String encodedPassword = userService.getEncodedPassword(usuario);
             usuario.setPassword(encodedPassword);
-            //Probar con esto
+            //Roles
+            if (selectedRoles != null && selectedRoles.isEmpty()) {
+                Set<Role> roles = new HashSet<>(roleService.getRolesByIds(selectedRoles));
+                usuario.setRoles(roles);
+            } else {
+                Set<Role> roles = new HashSet<>();
+                roles.add(roleService.findByNombre("USER"));
+                usuario.setRoles(roles);
+            }
             usuarioService.saveusr(usuario);
             return String.format("redirect:/login", usuarioService.saveusr(usuario).getToken());
         } else {
@@ -203,7 +214,12 @@ public class HelloController {
 
         LoginResponse loginResponse = new LoginResponse();
         new ModelMapper().map(usuario, loginResponse);
+
+        Set<Role> roles = usuario.getRoles();
+
         interfaz.addAttribute("loginResponse", loginResponse);
+        interfaz.addAttribute("listaRole", roleService.roleList());
+        interfaz.addAttribute("usuarioRoles", usuario.getRoles());
         return "editarUsers";
     }
 
