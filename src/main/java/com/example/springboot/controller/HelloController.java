@@ -264,12 +264,12 @@ public class HelloController {
         return "redirect:/usuarios";
     }
 
-    @GetMapping("/usuarios/passwd")
+    @GetMapping("/usuarios/passwd/{id}")
     public String mostrarPasswd(ModelMap interfaz) {
         return "passwd";
     }
 
-    @PostMapping("/usuarios/passwd")
+    @PostMapping("/usuarios/passwd{id}")
     public String cambiarPasswd(@RequestParam String viejaPasswd, @RequestParam String nuevaPasswd,
                                 @RequestParam String confirmPassword, ModelMap interfaz,
                                 Principal principal) {
