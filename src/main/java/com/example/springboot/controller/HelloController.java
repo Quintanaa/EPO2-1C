@@ -1,14 +1,13 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.FlaskApiService;
-import com.example.springboot.dto.LoginRequest;
-import com.example.springboot.dto.LoginResponse;
-import com.example.springboot.dto.LoginResponsePasswd;
-import com.example.springboot.dto.RoleDTO;
+import com.example.springboot.dto.*;
+import com.example.springboot.model.Producto;
 import com.example.springboot.model.Role;
 import com.example.springboot.model.Usuario;
 import com.example.springboot.psswd.ValidarFormatoPassword;
 import com.example.springboot.securityservice.IUsuarioServicio;
+import com.example.springboot.servicios.ProductoService;
 import com.example.springboot.servicios.RoleService;
 import com.example.springboot.servicios.UsuarioService;
 import jakarta.annotation.PostConstruct;
@@ -41,13 +40,17 @@ public class HelloController {
 
     final RoleService roleService;
 
+    final ProductoService productoService;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public HelloController(IUsuarioServicio userService, UsuarioService usuarioService, RoleService roleService) {
+    public HelloController(IUsuarioServicio userService, UsuarioService usuarioService,
+                           RoleService roleService, ProductoService productoService) {
         this.userService = userService;
         this.usuarioService = usuarioService;
         this.roleService = roleService;
+        this.productoService = productoService;
     }
 
     @PostConstruct
@@ -313,5 +316,73 @@ public class HelloController {
 
         interfaz.addAttribute("mensaje", "Contraseña actualizada correctamente.");
         return "redirect:/usuarios";
+    }
+
+    //Parte de Productos
+    @GetMapping("/productos")
+    public String listarProductos(ModelMap interfaz) {
+        interfaz.addAttribute("productos", productoService.listProductoDTO());
+        return "productos";
+    }
+
+    @GetMapping("/productos/nuevo")
+    public String formularioProducto(ModelMap interfaz) {
+        interfaz.addAttribute("producto", new Producto());
+        return "nuevoProducto";
+    }
+
+    @PostMapping("/productos/nuevo")
+    public String guardarProducto(@ModelAttribute("producto") Producto product, ModelMap interfaz) {
+        productoService.saveProd(product);
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/productos/editar/{id}")
+    public String editarProducto(@PathVariable Long id, ModelMap interfaz) {
+        Producto producto = productoService.getRepo().findById(id).orElse(null);
+        if (producto == null) {
+            return "redirect:/productos";
+        }
+
+        ProductoDTO productoDTO = new ProductoDTO();
+        new ModelMapper().map(producto, productoDTO);
+
+        interfaz.addAttribute("producto", productoDTO);
+        return "editarProducto";
+    }
+
+    @PostMapping("/productos/editar/{id}")
+    public String guardarProducto(@PathVariable Long id,
+                                 @ModelAttribute(name = "producto") ProductoDTO productoDTO) {
+        Producto producto = productoService.getRepo().findById(id).orElse(null);
+        if (producto == null) {
+            return "redirect:/productos";
+        }
+
+        producto.setNombre(productoDTO.getNombre());
+        producto.setCantidad(productoDTO.getCantidad());
+        producto.setPrecio(productoDTO.getPrecio());
+
+        productoService.getRepo().save(producto);
+        return "redirect:/productos";
+    }
+
+    @GetMapping("/productos/eliminar/{id}")
+    public String confirmarEliminarProducto(@PathVariable Long id, ModelMap interfaz) {
+        Producto producto = productoService.getRepo().findById(id).orElse(null);
+        if (producto == null) {
+            return "redirect:/productos";
+        }
+
+        ProductoDTO productoDTO = new ProductoDTO();
+        new ModelMapper().map(producto, productoDTO);
+        interfaz.addAttribute("producto", productoDTO);
+        return "eliminarProducto";
+    }
+
+    @PostMapping("/productos/eliminar/{id}")
+    public String eliminarProducto(@PathVariable Long id, ModelMap interfaz) {
+        productoService.getRepo().deleteById(id);
+        return "redirect:/productos";
     }
 }

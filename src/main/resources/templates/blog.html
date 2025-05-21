@@ -53,10 +53,15 @@
 			<h1 class="sitename">FlexStart</h1>
 		</a>
 
+
+		<a th:href="@{/productos}" class="user-button"> Ver productos</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
 		<!-- Solo mostrar "Ver Usuarios" si el usuario tiene rol ADMIN -->
 		<sec:authorize access="hasRole('ADMIN')">
-			<a th:href="@{/usuarios}" class="user-button">Ver Usuarios</a>
+			<a th:href="@{/usuarios}" class="user-button"> Ver Usuarios</a>
 		</sec:authorize>
+
 
 		<nav id="navmenu" class="navmenu">
 			<ul>
