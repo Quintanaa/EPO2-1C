@@ -1,5 +1,6 @@
-package com.example.springboot;
+package com.example.springboot.servicios;
 
+import com.example.springboot.MultipartInputStreamFileResource;
 import com.example.springboot.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,6 @@ import com.example.springboot.dto.LoginResponse;
 
 import com.example.springboot.pokemon.PokemonDTO;
 import com.example.springboot.pokemon.PokemonResponse;
-import com.example.springboot.servicios.UsuarioService;
 
 @Service
 public class FlaskApiService {
@@ -41,58 +41,6 @@ public class FlaskApiService {
 		return restTemplate.getForObject(flaskBaseUrl + "/api/v1/ping", String.class);
 	}
 
-	public boolean loginToFlask(String username, String password, Model model) {
-		String url = flaskBaseUrl + "/api/v1/auth/login";
-
-		LoginRequest request = new LoginRequest();
-		request.setUsername(username);
-		request.setPassword(password);
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		HttpEntity<LoginRequest> entity = new HttpEntity<>(request, headers);
-
-		try {
-			ResponseEntity<LoginResponse> response = restTemplate.postForEntity(url, entity, LoginResponse.class);
-			LoginResponse user = response.getBody();
-
-			model.addAttribute("username", user.getUsername());
-			model.addAttribute("email", user.getEmail());
-			model.addAttribute("token", user.getToken());
-
-			//Guardamos el usuario en MySQL
-			Usuario usuario = new Usuario();
-			usuario.setUsername(user.getUsername());
-			usuario.setEmail(user.getEmail());
-			usuario.setPassword("password");
-
-			usuarioService.registerUsuario(usuario);
-
-			return true;
-
-		} catch (HttpClientErrorException e) {
-			if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
-				// Error 400
-				model.addAttribute("error", "Datos inválidos enviados al servidor.");
-			} else if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
-				// Error 401
-				model.addAttribute("error", "Usuario o contraseña incorrectos.");
-			} else if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
-				// Error 404
-				model.addAttribute("error", "La ruta del servidor no fue encontrada.");
-			} else {
-				model.addAttribute("error", "Error desconocido: " + e.getMessage());
-			}
-		} catch (ResourceAccessException e) {
-			//No se pudo conectar con Flask
-			model.addAttribute("error", "No se pudo conectar con el servidor Flask.");
-		} catch (Exception e) {
-			model.addAttribute("error", "Ocurrió un error inesperado.");
-		}
-
-		return false;
-	}
 
 	public String readFile(MultipartFile file, Model model) {
 		String url = flaskBaseUrl + "/api/v1/file/file-read";

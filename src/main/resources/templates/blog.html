@@ -158,31 +158,6 @@
 
 							<article>
 
-								<div class="col-12">
-									<article>
-										<h2 class="title">Login a Flask API</h2>
-										<div class="content">
-											<p>
-												<strong>Usuario:</strong> <span th:text="${username}">-</span>
-											</p>
-											<p>
-												<strong>Email:</strong> <span th:text="${email}">-</span>
-											</p>
-											<p>
-												<strong>Token:</strong> <span th:text="${token}">-</span>
-											</p>
-											<p style="color: red;" th:if="${error}" th:text="${error}">Error</p>
-
-											<!-- Enlace al formulario de login -->
-											<div class="mt-3">
-												<a th:href="@{/flask-login}"
-												   class="btn btn-outline-primary">Ir al formulario de
-													login</a>
-											</div>
-										</div>
-									</article>
-								</div>
-
 								<form th:action="@{/file-upload}" method="post"
 									  enctype="multipart/form-data"
 									  class="row g-2 align-items-center mt-4">
@@ -190,8 +165,7 @@
 										<input type="file" name="file" class="form-control" required>
 									</div>
 									<div class="col-md-4">
-										<button type="submit" class="btn btn-success w-100">Subir
-											y leer archivo</button>
+										<button type="submit" class="btn btn-success w-100">Subir archivo .txt</button>
 									</div>
 								</form>
 

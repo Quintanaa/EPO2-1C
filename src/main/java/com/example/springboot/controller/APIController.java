@@ -1,6 +1,6 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.FlaskApiService;
+import com.example.springboot.servicios.FlaskApiService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,28 +15,6 @@ public class APIController {
 
     @Autowired
     private FlaskApiService flaskApiService;
-
-    //Flask-Login
-    @GetMapping("/flask-login")
-    public String showFlaskLoginForm() {
-        return "login";  // Nombre del archivo .html que contiene el formulario
-    }
-
-
-    @PostMapping("/flask-login")
-    public String doFlaskLogin(@RequestParam String username, @RequestParam String password, Model model,
-                               HttpSession session) {
-        Boolean res = flaskApiService.loginToFlask(username, password, model);
-
-        if (res) {
-            // Guardamos el usuario autenticado en la sesión
-            session.setAttribute("loggedInUser", username);
-            return "redirect:/blog";
-        } else {
-            return "login";
-        }
-    }
-
 
     //Subir archivos
     @PostMapping("/file-upload")

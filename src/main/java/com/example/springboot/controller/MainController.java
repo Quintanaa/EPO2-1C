@@ -40,37 +40,6 @@ public class MainController {
         this.roleService = roleService;
     }
 
-    @PostConstruct
-    public void addRoles(){
-        crearRol("ADMIN");
-        crearRol("USER");
-        crearRol("MODERATOR");
-    }
-
-    private void crearRol(String rol){
-        Role role = new Role();
-        role.setRole(rol);
-        roleService.save(role);
-    }
-
-    @PostConstruct
-    public void addFirstUser(){
-        Usuario user = new Usuario();
-        user.setId(37);
-        user.setUsername("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        user.setEmail("email@email.com");
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleService.findByNombre("ADMIN"));
-        roles.add(roleService.findByNombre("USER"));
-        roles.add(roleService.findByNombre("MODERATOR"));
-        user.setRoles(roles);
-
-        usuarioService.saveusr(user);
-        System.out.println("Usuario creado con todos los roles");
-    }
-
     //Páginas generales
     @GetMapping("/")
     public String index() {
@@ -105,7 +74,7 @@ public class MainController {
 
     @PostMapping("/registro")
     public String guardarRegistro(@ModelAttribute(name = "datosUsuario") LoginResponsePasswd usuarioDTOpasswd,
-                                  @RequestParam(required = false) List<Long> selectedRoles) throws Exception {
+                                  @RequestParam(required = false) List<Long> selectedRoles, Model interfaz) throws Exception {
         //Comprobamos el patrón
         System.out.println("Guardando usuario antes: ");
         System.out.println("usuario: " + usuarioDTOpasswd.getUsername() + " password: " + usuarioDTOpasswd.getPassword());
@@ -132,6 +101,8 @@ public class MainController {
             usuarioService.saveusr(usuario);
             return String.format("redirect:/login", usuarioService.saveusr(usuario).getToken());
         } else {
+            interfaz.addAttribute("listaRoles", roleService.roleList());
+            interfaz.addAttribute("datosUsuario", usuarioDTOpasswd);
             return "usuarios/registro";
         }
     }
