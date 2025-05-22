@@ -7,5 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 public class RoleDTO {
+
+    private long id;
     private String role;
 }

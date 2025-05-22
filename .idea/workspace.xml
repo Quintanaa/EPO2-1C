@@ -5,19 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bd00c2d-fd7d-4624-88b6-d69bdf4ccf50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/Repositorios/ProductoRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/ProductoDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Producto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/ProductoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/editarProducto.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/eliminarProducto.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/nuevoProducto.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/productos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/Repositorios/CategoriaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/CategoriaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Categoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/servicios/CategoriaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/editarCategoria.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/eliminarCategoria.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/nuevaCategoria.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/RoleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,7 +353,7 @@
       <workItem from="1747729107849" duration="22326000" />
       <workItem from="1747838238387" duration="1048000" />
       <workItem from="1747844028813" duration="2991000" />
-      <workItem from="1747860552680" duration="2982000" />
+      <workItem from="1747860552680" duration="4966000" />
     </task>
     <servers />
   </component>

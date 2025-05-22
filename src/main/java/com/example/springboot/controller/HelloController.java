@@ -2,11 +2,13 @@ package com.example.springboot.controller;
 
 import com.example.springboot.FlaskApiService;
 import com.example.springboot.dto.*;
+import com.example.springboot.model.Categoria;
 import com.example.springboot.model.Producto;
 import com.example.springboot.model.Role;
 import com.example.springboot.model.Usuario;
 import com.example.springboot.psswd.ValidarFormatoPassword;
 import com.example.springboot.securityservice.IUsuarioServicio;
+import com.example.springboot.servicios.CategoriaService;
 import com.example.springboot.servicios.ProductoService;
 import com.example.springboot.servicios.RoleService;
 import com.example.springboot.servicios.UsuarioService;
@@ -42,15 +44,19 @@ public class HelloController {
 
     final ProductoService productoService;
 
+    final CategoriaService categoriaService;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     public HelloController(IUsuarioServicio userService, UsuarioService usuarioService,
-                           RoleService roleService, ProductoService productoService) {
+                           RoleService roleService, ProductoService productoService,
+                           CategoriaService categoriaService) {
         this.userService = userService;
         this.usuarioService = usuarioService;
         this.roleService = roleService;
         this.productoService = productoService;
+        this.categoriaService = categoriaService;
     }
 
     @PostConstruct
@@ -318,7 +324,7 @@ public class HelloController {
         return "redirect:/usuarios";
     }
 
-    //Parte de Productos
+    //Parte de productos
     @GetMapping("/productos")
     public String listarProductos(ModelMap interfaz) {
         interfaz.addAttribute("productos", productoService.listProductoDTO());
@@ -353,7 +359,7 @@ public class HelloController {
 
     @PostMapping("/productos/editar/{id}")
     public String guardarProducto(@PathVariable Long id,
-                                 @ModelAttribute(name = "producto") ProductoDTO productoDTO) {
+                                  @ModelAttribute(name = "producto") ProductoDTO productoDTO) {
         Producto producto = productoService.getRepo().findById(id).orElse(null);
         if (producto == null) {
             return "redirect:/productos";
@@ -384,5 +390,72 @@ public class HelloController {
     public String eliminarProducto(@PathVariable Long id, ModelMap interfaz) {
         productoService.getRepo().deleteById(id);
         return "redirect:/productos";
+    }
+
+    //Categoría
+    @GetMapping("/categorias")
+    public String listarCategorias(ModelMap interfaz) {
+        interfaz.addAttribute("categorias", categoriaService.listCategoriaDTO());
+        return "categorias";
+    }
+
+    @GetMapping("/categorias/nuevo")
+    public String formularioCategoria(ModelMap interfaz) {
+        interfaz.addAttribute("categoria", new Categoria());
+        return "nuevaCategoria";
+    }
+
+    @PostMapping("/categorias/nuevo")
+    public String guardarCategorias(@ModelAttribute("categoria") Categoria categoria, ModelMap interfaz) {
+        categoriaService.save(categoria);
+        return "redirect:/categorias";
+    }
+
+    @GetMapping("/categorias/editar/{id}")
+    public String editarCategoria(@PathVariable Long id, ModelMap interfaz) {
+        Categoria categoria = categoriaService.getRepo().findById(id).orElse(null);
+        if (categoria == null) {
+            return "redirect:/categorias";
+        }
+
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        new ModelMapper().map(categoria, categoriaDTO);
+
+        interfaz.addAttribute("categoria", categoriaDTO);
+        return "editarCategoria";
+    }
+
+    @PostMapping("/categorias/editar/{id}")
+    public String guardarProducto(@PathVariable Long id,
+                                  @ModelAttribute(name = "categoria") CategoriaDTO categoriaDTO) {
+        Categoria categoria = categoriaService.getRepo().findById(id).orElse(null);
+        if (categoria == null) {
+            return "redirect:/categorias";
+        }
+
+        categoria.setNombre(categoriaDTO.getNombre());
+        categoria.setDescripcion(categoriaDTO.getDescripcion());
+
+        categoriaService.getRepo().save(categoria);
+        return "redirect:/categorias";
+    }
+
+    @GetMapping("/categorias/eliminar/{id}")
+    public String confirmarEliminarCategoria(@PathVariable Long id, ModelMap interfaz) {
+        Categoria categoria = categoriaService.getRepo().findById(id).orElse(null);
+        if (categoria == null) {
+            return "redirect:/categorias";
+        }
+
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        new ModelMapper().map(categoria, categoriaDTO);
+        interfaz.addAttribute("categoria", categoriaDTO);
+        return "eliminarCategoria";
+    }
+
+    @PostMapping("/categorias/eliminar/{id}")
+    public String eliminarCategoria(@PathVariable Long id, ModelMap interfaz) {
+        categoriaService.getRepo().deleteById(id);
+        return "redirect:/categorias";
     }
 }
