@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,4 +20,6 @@ public class ProductoDTO {
     private double precio;
 
     private int cantidad;
+
+    private Set<CategoriaDTO> categorias;
 }

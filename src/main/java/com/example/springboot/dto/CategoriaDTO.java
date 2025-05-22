@@ -1,13 +1,11 @@
 package com.example.springboot.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,4 +16,5 @@ public class CategoriaDTO {
     private long id;
     private String nombre;
     private String descripcion;
+    private Set<ProductoDTO> productos;
 }

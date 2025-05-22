@@ -244,7 +244,7 @@ public class HelloController {
     @PostMapping("/usuarios/editar/{id}")
     public String guardarUsuario(@PathVariable Long id,
                                  @ModelAttribute(name = "loginForm") LoginResponse loginResponse,
-                                 @RequestParam("roles") List<Long> roleIds) {
+                                 @RequestParam("rolesSeleccionados") List<Long> roleIds) {
         Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
         if (usuario == null) {
             return "redirect:/usuarios";
@@ -257,6 +257,7 @@ public class HelloController {
 
         Set<Role> roles = new HashSet<>(roleService.getRolesByIds(roleIds));
         usuario.setRoles(roles);
+
 
         usuarioService.getRepo().save(usuario);
         return "redirect:/usuarios";
@@ -334,11 +335,17 @@ public class HelloController {
     @GetMapping("/productos/nuevo")
     public String formularioProducto(ModelMap interfaz) {
         interfaz.addAttribute("producto", new Producto());
+        interfaz.addAttribute("categorias", categoriaService.categoriaList());
         return "nuevoProducto";
     }
 
     @PostMapping("/productos/nuevo")
-    public String guardarProducto(@ModelAttribute("producto") Producto product, ModelMap interfaz) {
+    public String guardarProducto(@ModelAttribute("producto") Producto product, ModelMap interfaz,
+                                  @RequestParam(required = false) List<Long> selectedCategorias) {
+        if (selectedCategorias != null && selectedCategorias.isEmpty()) {
+            Set<Categoria> categorias = new HashSet<>(categoriaService.getCategoriasByIds(selectedCategorias));
+            product.setCategorias(categorias);
+        }
         productoService.saveProd(product);
         return "redirect:/productos";
     }
@@ -354,12 +361,15 @@ public class HelloController {
         new ModelMapper().map(producto, productoDTO);
 
         interfaz.addAttribute("producto", productoDTO);
+        interfaz.addAttribute("categorias", categoriaService.categoriaList());
+        interfaz.addAttribute("productoCategorias", producto.getCategorias());
         return "editarProducto";
     }
 
     @PostMapping("/productos/editar/{id}")
     public String guardarProducto(@PathVariable Long id,
-                                  @ModelAttribute(name = "producto") ProductoDTO productoDTO) {
+                                  @ModelAttribute(name = "producto") ProductoDTO productoDTO,
+                                  @RequestParam("selectedCategorias") List<Long> categoriasIds) {
         Producto producto = productoService.getRepo().findById(id).orElse(null);
         if (producto == null) {
             return "redirect:/productos";
@@ -368,6 +378,9 @@ public class HelloController {
         producto.setNombre(productoDTO.getNombre());
         producto.setCantidad(productoDTO.getCantidad());
         producto.setPrecio(productoDTO.getPrecio());
+
+        Set<Categoria> categorias = new HashSet<>(categoriaService.getCategoriasByIds(categoriasIds));
+        producto.setCategorias(categorias);
 
         productoService.getRepo().save(producto);
         return "redirect:/productos";
