@@ -154,44 +154,6 @@
 
 					<div class="container">
 
-						<div class="row gy-4">
-
-							<div class="col-12">
-								<article>
-									<div th:if="${error}" class="alert alert-danger" role="alert">
-										<i class="bi bi-exclamation-triangle"></i><span
-											th:text="${error}">Error</span>
-									</div>
-
-
-									<h2 class="title">
-										<a href="#">Datos desde la API Flask</a>
-									</h2>
-
-									<div class="meta-top">
-										<ul>
-											<li class="d-flex align-items-center"><i
-													class="bi bi-code-slash"></i> <span>Flask API</span></li>
-											<li class="d-flex align-items-center"><i
-													class="bi bi-clock"></i> <span
-													th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">Fecha
-														actual</span></li>
-										</ul>
-									</div>
-
-									<div class="content">
-										<p>
-											<strong>Respuesta:</strong><br> <span
-												th:text="${apiData}">Cargando datos de la API...</span>
-										</p>
-									</div>
-								</article>
-							</div>
-
-							</article>
-						</div>
-						<!-- End post list item -->
-
 						<div class="col-12">
 
 							<article>

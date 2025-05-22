@@ -1,20 +1,27 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.dto.LoginRequest;
+import com.example.springboot.dto.LoginResponse;
 import com.example.springboot.dto.LoginResponsePasswd;
+import com.example.springboot.model.Role;
 import com.example.springboot.model.Usuario;
 import com.example.springboot.psswd.ValidarFormatoPassword;
 import com.example.springboot.securityservice.IUsuarioServicio;
 import com.example.springboot.servicios.RoleService;
 import com.example.springboot.servicios.UsuarioService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Controller
 public class UserController {
 
     final IUsuarioServicio userService;
@@ -25,67 +32,125 @@ public class UserController {
 
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserController(IUsuarioServicio userService, UsuarioService usuarioService, RoleService roleService) {
+    public UserController(IUsuarioServicio userService, UsuarioService usuarioService, RoleService roleService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.usuarioService = usuarioService;
         this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
+    @Secured("ADMIN")
     @GetMapping("/usuarios")
     public String listaUsuarios(ModelMap interfaz) {
-        interfaz.addAttribute("lista", usuarioService.listUsrDTO());
-        return "usuarios/lista";
+        interfaz.addAttribute("usuarios", usuarioService.listUsrDTO());
+        return "usuarios/usuarios";
     }
 
-    @GetMapping("/registro")
-    public String vistaRegistro(Model interfaz) {
-        interfaz.addAttribute("listaRoles", roleService.roleList());
-        interfaz.addAttribute("datosUsuario", new LoginResponsePasswd()); // este nombre debe coincidir
-        System.out.println("Preparando pantalla registro");
-        return "registro";
+    @GetMapping("/errorUsers")
+    public String accesoDenegado(Model model) {
+        model.addAttribute("mensaje", "No tienes permiso para acceder a esta página.");
+        return "usuarios/errorUsers"; // Nombre de la plantilla
     }
 
-    @PostMapping("/registro")
-    public String guardarRegistro(@ModelAttribute(name = "datosUsuario")LoginResponsePasswd usuarioDTOpasswd) throws Exception {
-        //Comprobamos el patrón
-        System.out.println("Guardando usuario antes: ");
-        System.out.println("usuario: " + usuarioDTOpasswd.getUsername() + " password: " + usuarioDTOpasswd.getPassword());
-        if (ValidarFormatoPassword.validarFormato(usuarioDTOpasswd.getPassword())) {
-            //Convertimos el dto a un elemento del model
-            ModelMapper modelMapper = new ModelMapper();
-            Usuario usuario = new Usuario();
-            modelMapper.map(usuarioDTOpasswd, usuario);
-
-            System.out.println("Buscando usuario");
-            System.out.println("Usuario: " + usuarioDTOpasswd.getUsername() + " password: " + usuarioDTOpasswd.getPassword());
-            //Codifico la contraseña
-            String encodedPassword = userService.getEncodedPassword(usuario);
-            usuario.setPassword(encodedPassword);
-            //El usuario se guarda como no autorizado
-            //Guardo la password
-            //return "usuarios/detalleusuario";
-            return String.format("redirect:/usuarios/%s", usuarioService.saveusr(usuario).getToken());
-        } else {
-            return "registro";
+    @GetMapping("/usuarios/editar/{id}")
+    public String editarUsuario(@PathVariable Long id, ModelMap interfaz) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
         }
+
+        LoginResponse loginResponse = new LoginResponse();
+        new ModelMapper().map(usuario, loginResponse);
+
+        Set<Role> roles = usuario.getRoles();
+
+        interfaz.addAttribute("loginResponse", loginResponse);
+        interfaz.addAttribute("listaRole", roleService.roleList());
+        interfaz.addAttribute("usuarioRoles", usuario.getRoles());
+        return "usuarios/editarUsers";
     }
 
-    @GetMapping("/login")
-    public String vistaLogin(ModelMap interfaz) {
-        return "usuarios/login";
-    }
-
-    @PostMapping("/login")
-    public String validarPasswordPst(@ModelAttribute(name = "loginForm")LoginRequest loginRequest){
-        String usr = loginRequest.getUsername();
-        System.out.println("user: " +usr);
-        String password = loginRequest.getPassword();
-        System.out.println("password: " +password);
-        //¿Es correcta la password?
-        if (usuarioService.getRepo().repValidarPassword(usr, passwordEncoder.encode(password)) > 0){
-            return "redirect:/blog";
-        } else {
-            return "usuarios/login";
+    @PostMapping("/usuarios/editar/{id}")
+    public String guardarUsuario(@PathVariable Long id,
+                                 @ModelAttribute(name = "loginForm") LoginResponse loginResponse,
+                                 @RequestParam("rolesSeleccionados") List<Long> roleIds) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
         }
+
+        usuario.setUsername(loginResponse.getUsername());
+        usuario.setEmail(loginResponse.getEmail());
+
+        //Debemos gestionar la contraseña a parte
+
+        Set<Role> roles = new HashSet<>(roleService.getRolesByIds(roleIds));
+        usuario.setRoles(roles);
+
+
+        usuarioService.getRepo().save(usuario);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/usuarios/eliminar/{id}")
+    public String confirmarEliminar(@PathVariable Long id, ModelMap interfaz) {
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
+
+        LoginResponse loginResponse = new LoginResponse();
+        new ModelMapper().map(usuario, loginResponse);
+        interfaz.addAttribute("loginResponse", loginResponse);
+        return "usuarios/eliminarUsers";
+    }
+
+    @PostMapping("/usuarios/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable Long id, ModelMap interfaz) {
+        usuarioService.getRepo().deleteById(id);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/usuarios/passwd/{id}")
+    public String mostrarPasswd(@PathVariable Long id,ModelMap interfaz) {
+        interfaz.addAttribute("id", id);
+        return "password/passwd";
+    }
+
+    @PostMapping("/usuarios/passwd{id}")
+    public String cambiarPasswd(@PathVariable Long id,@RequestParam String viejaPasswd,
+                                @RequestParam String nuevaPasswd, @RequestParam String confirmPassword,
+                                ModelMap interfaz) {
+
+        Usuario usuario = usuarioService.getRepo().findById(id).orElse(null);
+
+        if (usuario == null) {
+            interfaz.addAttribute("error", "Usuario no encontrado.");
+            return "password/passwd";
+        }
+
+        if(!passwordEncoder.matches(viejaPasswd, usuario.getPassword())) {
+            interfaz.addAttribute("error", "La contraseña actual no es correcta.");
+            interfaz.addAttribute("id", id);
+            return "password/passwd";
+        }
+
+        if(!nuevaPasswd.equals(confirmPassword)) {
+            interfaz.addAttribute("error", "La contraseñas no coinciden.");
+            interfaz.addAttribute("id", id);
+            return "password/passwd";
+        }
+
+        if(!ValidarFormatoPassword.validarFormato(nuevaPasswd)) {
+            interfaz.addAttribute("error", "La contraseña no es válida.");
+            interfaz.addAttribute("id", id);
+            return "password/passwd";
+        }
+
+        usuario.setPassword(passwordEncoder.encode(nuevaPasswd));
+        usuarioService.getRepo().save(usuario);
+
+        interfaz.addAttribute("mensaje", "Contraseña actualizada correctamente.");
+        return "redirect:/usuarios";
     }
 }

@@ -5,18 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bd00c2d-fd7d-4624-88b6-d69bdf4ccf50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/APIController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/CategoriaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/CategoriaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/ProductoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/dto/ProductoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Categoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/model/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/categorias.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editarProducto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editarUsers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/nuevoProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/nuevoProducto.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productos.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/categorias.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias/categorias.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarCategoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias/editarCategoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productos/editarProducto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/editarUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/editarUsers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/eliminarCategoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias/eliminarCategoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/eliminarProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productos/eliminarProducto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/eliminarUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/eliminarUsers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/errorUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/errorUsers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/nuevaCategoria.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/categorias/nuevaCategoria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/nuevoProducto.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productos/nuevoProducto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/passwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/password/passwd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productos.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productos/productos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/usuarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/usuarios/usuarios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/springboot/HelloControllerITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/springboot/MainControllerITest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/springboot/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/springboot/MainControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,11 +156,11 @@
       <recent name="C:\Users\Rubén\Desktop\UBU\EPO2-1C\pscapp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api\sql" />
-      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api\database\api_flask_mysql.sql" />
-      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C" />
-      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\api" />
-      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\pscapp" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\resources\templates\password" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\resources\templates" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\resources\templates\usuarios" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\resources\templates\productos" />
+      <recent name="C:\Users\Rubén\eclipse-workspace\gs-spring-boot-main\EPO2-1C\src\main\resources\templates\categorias" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.springboot.servicios" />
@@ -354,7 +366,8 @@
       <workItem from="1747838238387" duration="1048000" />
       <workItem from="1747844028813" duration="2991000" />
       <workItem from="1747860552680" duration="4966000" />
-      <workItem from="1747912187450" duration="3768000" />
+      <workItem from="1747912187450" duration="5059000" />
+      <workItem from="1747917300276" duration="2433000" />
     </task>
     <servers />
   </component>
@@ -373,11 +386,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/pokemon/PokemonDTO.java</url>
           <line>10</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/springboot/controller/HelloController.java</url>
-          <line>237</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
